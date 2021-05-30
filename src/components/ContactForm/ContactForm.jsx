@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import style from './ContactForm.module.css';
 import { v4 as uuidv4 } from 'uuid';
+import { connect } from 'react-redux';
+import contactsActions from '../../redux/contacts/contacts-actions';
 
 class ContactForm extends Component {
   state = {
@@ -16,7 +18,8 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { name, number } = this.state;
-    this.props.onSubmit({ id: uuidv4(), name: name, number: number });
+    const contact = { id: uuidv4(), name: name, number: number };
+    this.props.onSubmit(contact);
     this.reset();
   };
 
@@ -65,4 +68,9 @@ class ContactForm extends Component {
   }
 }
 
-export default ContactForm;
+// export default ContactForm;
+const mapDispatchToProps = dispatch => ({
+  onSubmit: ({ name, number }) =>
+    dispatch(contactsActions.addContacts({ name, number })),
+});
+export default connect(null, mapDispatchToProps)(ContactForm);
