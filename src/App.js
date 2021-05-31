@@ -1,30 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import style from './App.module.css';
 import ContactForm from './components/ContactForm/ContactForm';
 import ContactList from './components/ContactList/ContactList';
 import Filter from './components/Filter/Filter';
-// import contactsArr from './contacts.json';
 
-class App extends Component {
-  // state = {
-  //   contacts: [],
-  //   filter: '',
-  // };
-
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-  //   const parsedContacts = JSON.parse(contacts);
-  //   if (parsedContacts) {
-  //     this.setState({ contacts: parsedContacts });
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-  //     localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-  //   }
-  // }
-
+const App = () => (
   // addContacts = contact => {
   //   const { name } = contact;
   //   const { contacts } = this.state;
@@ -40,38 +20,14 @@ class App extends Component {
   //     }));
   //   }
   // };
+  <div className={style.phonebook}>
+    <h1>Phonebook</h1>
+    <ContactForm />
 
-  // changeFilter = event => {
-  //   this.setState({ filter: event.currentTarget.value });
-  // };
-
-  // getVisibleContact = () => {
-  //   const { filter, contacts } = this.state;
-  //   const normalizedFilter = filter.toLowerCase();
-  //   return contacts.filter(contact =>
-  //     contact.name.toLowerCase().includes(normalizedFilter),
-  //   );
-  // };
-
-  // deleteContact = contactId => {
-  //   this.setState(prevState => ({
-  //     contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-  //   }));
-  // };
-
-  render() {
-    // const visibleContacts = this.getVisibleContact();
-    return (
-      <div className={style.phonebook}>
-        <h1>Phonebook</h1>
-        <ContactForm onSubmit={this.addContacts} />
-
-        <h2>Contacts</h2>
-        <Filter />
-        <ContactList />
-      </div>
-    );
-  }
-}
+    <h2>Contacts</h2>
+    <Filter />
+    <ContactList />
+  </div>
+);
 
 export default App;

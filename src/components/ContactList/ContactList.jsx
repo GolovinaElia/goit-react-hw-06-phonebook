@@ -25,11 +25,6 @@ const ContactsList = ({ contacts, onDeleteContact }) => (
   </div>
 );
 
-ContactsList.propTypes = {
-  contacts: PropTypes.array.isRequired,
-  onDeleteContact: PropTypes.func.isRequired,
-};
-
 const getVisibleContact = (allContacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
   return allContacts.filter(contact =>
@@ -37,11 +32,16 @@ const getVisibleContact = (allContacts, filter) => {
   );
 };
 
-// export default ContactsList;
 const mapStateToProps = ({ contacts: { items, filter } }) => ({
   contacts: getVisibleContact(items, filter),
 });
 const mapDispatchToProps = dispatch => ({
   onDeleteContact: id => dispatch(contactsActions.deleteContacts(id)),
 });
+
+ContactsList.propTypes = {
+  contacts: PropTypes.array.isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
+};
+
 export default connect(mapStateToProps, mapDispatchToProps)(ContactsList);

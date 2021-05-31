@@ -18,8 +18,16 @@ class ContactForm extends Component {
   handleSubmit = event => {
     event.preventDefault();
     const { name, number } = this.state;
+    const { contacts } = this.props;
     const contact = { id: uuidv4(), name: name, number: number };
-    this.props.onSubmit(contact);
+    const inputName = contacts.find(
+      contact => contact.name.toLowerCase() === name.toLowerCase(),
+    );
+    if (inputName) {
+      alert(`${name} is already in contacts`);
+    } else {
+      this.props.onSubmit(contact);
+    }
     this.reset();
   };
 
@@ -68,9 +76,12 @@ class ContactForm extends Component {
   }
 }
 
-// export default ContactForm;
+const mapStateToProps = state => ({
+  contacts: state.contacts.items,
+});
+
 const mapDispatchToProps = dispatch => ({
   onSubmit: ({ name, number }) =>
     dispatch(contactsActions.addContacts({ name, number })),
 });
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
